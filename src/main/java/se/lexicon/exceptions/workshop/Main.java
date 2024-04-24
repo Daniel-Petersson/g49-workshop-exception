@@ -15,8 +15,8 @@ public class Main {
 		
 		List <String> maleFirstNames = CSVReader_Writer.getMaleFirstNames();
         List <String> femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
+        List<String> lastNames = CSVReader_Writer.getLastNames();
 
-        List<String> lastNames = null;
         try {
             lastNames = CSVReader_Writer.getLastNames();
         }catch (IOException e){
@@ -29,9 +29,33 @@ public class Main {
 
         Person test = nameService.getNewRandomPerson();
         System.out.println(test);
-        Person person1 = new Person("Daniel","Petersson", Gender.MALE);
-        Person person2 = new Person("Daniel", "Olsson",Gender.MALE);
-        nameService.addFemaleFirstName("Alice");
+            // Test getNewRandomPerson method
+            Person randomPerson = nameService.getNewRandomPerson();
+            System.out.println(randomPerson);
+
+            // Test addFemaleFirstName method
+            try {
+                    nameService.addFemaleFirstName("Alice");
+                    System.out.println("Successfully added new female first name.");
+            } catch (DuplicateNameException e) {
+                    System.out.println("Failed to add new female first name: " + e.getMessage());
+            }
+
+            // Test addMaleFirstName method
+            try {
+                    nameService.addMaleFirstName("David");
+                    System.out.println("Successfully added new male first name.");
+            } catch (DuplicateNameException e) {
+                    System.out.println("Failed to add new male first name: " + e.getMessage());
+            }
+
+            // Test addLastName method
+            try {
+                    nameService.addLastName("Brown");
+                    System.out.println("Successfully added new last name.");
+            } catch (DuplicateNameException e) {
+                    System.out.println("Failed to add new last name: " + e.getMessage());
+            }
 
 
 	}

@@ -6,9 +6,9 @@ import se.lexicon.exceptions.workshop.data_access.NameService;
 
 import se.lexicon.exceptions.workshop.domain.Person;
 import se.lexicon.exceptions.workshop.exception.DuplicateNameException;
+import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,10 +21,10 @@ class NameServiceTest {
     private List<String> lastNames;
 
     @BeforeEach
-    void setUp() {
-        maleFirstNames = new ArrayList<>(Arrays.asList("John", "James", "Robert"));
-        femaleFirstNames = new ArrayList<>(Arrays.asList("Mary", "Jennifer", "Linda"));
-        lastNames = new ArrayList<>(Arrays.asList("Smith", "Johnson", "Williams"));
+    void setUp() throws IOException {
+        maleFirstNames = CSVReader_Writer.getMaleFirstNames();
+        femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
+        lastNames = CSVReader_Writer.getLastNames();
         nameService = new NameService(maleFirstNames, femaleFirstNames, lastNames);
     }
 
@@ -41,8 +41,8 @@ class NameServiceTest {
 
     @Test
     void addFemaleFirstName_addsNameForNewName() throws DuplicateNameException {
-        nameService.addFemaleFirstName("Alice");
-        assertTrue(femaleFirstNames.contains("Alice"));
+        nameService.addFemaleFirstName("Vega");
+        assertTrue(femaleFirstNames.contains("Vega"));
     }
 
     @Test
@@ -52,8 +52,8 @@ class NameServiceTest {
 
     @Test
     void addMaleFirstName_addsNameForNewName() throws DuplicateNameException {
-        nameService.addMaleFirstName("David");
-        assertTrue(maleFirstNames.contains("David"));
+        nameService.addMaleFirstName("Daniel");
+        assertTrue(maleFirstNames.contains("Daniel"));
     }
 
     @Test
@@ -63,7 +63,7 @@ class NameServiceTest {
 
     @Test
     void addLastName_addsNameForNewName() throws DuplicateNameException {
-        nameService.addLastName("Brown");
-        assertTrue(lastNames.contains("Brown"));
+        nameService.addLastName("Larsson");
+        assertTrue(lastNames.contains("Larsson"));
     }
 }
