@@ -7,6 +7,7 @@ import se.lexicon.exceptions.workshop.data_access.NameService;
 import se.lexicon.exceptions.workshop.domain.Person;
 import se.lexicon.exceptions.workshop.exception.DuplicateNameException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,9 +22,9 @@ class NameServiceTest {
 
     @BeforeEach
     void setUp() {
-        maleFirstNames = Arrays.asList("John", "James", "Robert");
-        femaleFirstNames = Arrays.asList("Mary", "Jennifer", "Linda");
-        lastNames = Arrays.asList("Smith", "Johnson", "Williams");
+        maleFirstNames = new ArrayList<>(Arrays.asList("John", "James", "Robert"));
+        femaleFirstNames = new ArrayList<>(Arrays.asList("Mary", "Jennifer", "Linda"));
+        lastNames = new ArrayList<>(Arrays.asList("Smith", "Johnson", "Williams"));
         nameService = new NameService(maleFirstNames, femaleFirstNames, lastNames);
     }
 
